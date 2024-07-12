@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/sikozonpc/ecom/types"
+	"github.com/bernardhamann/tiago-ecom/types"
 )
 
 type Store struct {

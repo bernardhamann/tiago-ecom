@@ -6,7 +6,7 @@ import (
 	"testing"
 
 	"github.com/gorilla/mux"
-	"github.com/sikozonpc/ecom/types"
+	"github.com/bernardhamann/tiago-ecom/types"
 )
 
 func TestUserServiceHandlers(t *testing.T) {
