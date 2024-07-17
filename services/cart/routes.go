@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/go-playground/validator/v10"
-	"github.com/gorilla/mux"
 	"github.com/bernardhamann/tiago-ecom/services/auth"
 	"github.com/bernardhamann/tiago-ecom/types"
 	"github.com/bernardhamann/tiago-ecom/utils"
+	"github.com/go-playground/validator/v10"
+	"github.com/gorilla/mux"
 )
 
 type Handler struct {
@@ -35,7 +35,7 @@ func (h *Handler) RegisterRoutes(router *mux.Router) {
 
 func (h *Handler) handleCheckout(w http.ResponseWriter, r *http.Request) {
 	userID := auth.GetUserIDFromContext(r.Context())
-	
+
 	var cart types.CartCheckoutPayload
 	if err := utils.ParseJSON(r, &cart); err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)

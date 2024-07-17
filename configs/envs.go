@@ -22,8 +22,12 @@ type Config struct {
 var Envs = initConfig()
 
 func initConfig() Config {
+
+  // Load all the .env variables into the runtime
 	godotenv.Load()
 
+  // Get the environment variables form the runtime and build the config object
+  // If the environment variables is not in the runtime then use the fallback defaults
 	return Config{
 		PublicHost:             getEnv("PUBLIC_HOST", "http://localhost"),
 		Port:                   getEnv("PORT", "8080"),
@@ -41,7 +45,6 @@ func getEnv(key, fallback string) string {
 	if value, ok := os.LookupEnv(key); ok {
 		return value
 	}
-
 	return fallback
 }
 

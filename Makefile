@@ -15,3 +15,5 @@ migrate-up:
 
 migrate-down:
 	@go run cmd/migrate/main.go down
+
+# run in the terminal with make run

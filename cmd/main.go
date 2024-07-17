@@ -26,9 +26,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-  
-
 	initStorage(db)
 
 	server := api.NewAPIServer(fmt.Sprintf(":%s", configs.Envs.Port), db)
@@ -37,6 +34,8 @@ func main() {
 	}
 }
 
+// The bd open in the db.go file doe snot actually connect to the db
+// We need to ping the db to start the db connection
 func initStorage(db *sql.DB) {
 	err := db.Ping()
 	if err != nil {

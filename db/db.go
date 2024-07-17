@@ -8,6 +8,8 @@ import (
 )
 
 func NewMySQLStorage(cfg mysql.Config) (*sql.DB, error) {
+
+  // Open the db connection
 	db, err := sql.Open("mysql", cfg.FormatDSN())
 	if err != nil {
 		log.Fatal(err)

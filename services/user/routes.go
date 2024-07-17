@@ -5,12 +5,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-playground/validator/v10"
-	"github.com/gorilla/mux"
 	"github.com/bernardhamann/tiago-ecom/configs"
 	"github.com/bernardhamann/tiago-ecom/services/auth"
 	"github.com/bernardhamann/tiago-ecom/types"
 	"github.com/bernardhamann/tiago-ecom/utils"
+	"github.com/go-playground/validator/v10"
+	"github.com/gorilla/mux"
 )
 
 type Handler struct {
@@ -64,12 +64,14 @@ func (h *Handler) handleLogin(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) handleRegister(w http.ResponseWriter, r *http.Request) {
+	// Get Json Payload
 	var user types.RegisterUserPayload
 	if err := utils.ParseJSON(r, &user); err != nil {
 		utils.WriteError(w, http.StatusBadRequest, err)
 		return
 	}
 
+  // validate the payload
 	if err := utils.Validate.Struct(user); err != nil {
 		errors := err.(validator.ValidationErrors)
 		utils.WriteError(w, http.StatusBadRequest, fmt.Errorf("invalid payload: %v", errors))
@@ -90,6 +92,7 @@ func (h *Handler) handleRegister(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+  // create user if it does not exist
 	err = h.store.CreateUser(types.User{
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
